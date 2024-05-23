@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_shape_card"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/channel_icon_card"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:cardCornerRadius="50dp">
+
+        <ImageView
+            android:id="@+id/channel_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/channel_image_example"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_toEndOf="@id/channel_icon_card"
+        android:layout_width="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:textSize="20sp"
+            android:text="@string/example_channel_name"
+            android:textColor="@color/white"
+            android:id="@+id/channel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="86.2K Subs"
+            android:layout_marginTop="2dp"
+            android:textColor="#A18D8D"
+            android:id="@+id/channel_subs"
+            android:layout_below="@id/channel_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</RelativeLayout>

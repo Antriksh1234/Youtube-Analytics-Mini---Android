@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="example_channel_name">Tech With Lucy</string>
+    <string name="example_video_title">How much do AWS Solutions Architects get paid? | Salaries Revealed</string>
+    <string name="explain_feature">Paste your Video link here\n</string>
+</resources>

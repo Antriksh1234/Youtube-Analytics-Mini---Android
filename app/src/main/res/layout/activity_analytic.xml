@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AnalyticActivity"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/black">
+
+        <include
+            android:id="@+id/video_title_card"
+            android:layout_width="match_parent"
+            layout="@layout/video_info_card"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/video_option_card"
+            android:layout_below="@id/video_title_card"
+            layout="@layout/options_card"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"/>
+
+        <include
+            android:id="@+id/channel_card"
+            layout="@layout/channel_info_card"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/video_option_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/video_sentiment_card"
+            android:layout_below="@id/channel_card"
+            layout="@layout/sentiment_card"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"/>
+
+        <include
+            android:layout_marginTop="16dp"
+            layout="@layout/sentiment_card_2"
+            android:layout_below="@id/video_sentiment_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</ScrollView>

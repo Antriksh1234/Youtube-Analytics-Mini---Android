@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">YoutubeAnalyticsMini</string>
+    <string name="sentiment_image">Its the sentiment of image</string>
+    <string name="example_channel_name">Tech With Lucy</string>
+    <string name="example_video_title">How much do AWS Solutions Architects get paid? | Salaries Revealed</string>
+    <string name="explain_feature">Paste your Video link here\n</string>
+</resources>
