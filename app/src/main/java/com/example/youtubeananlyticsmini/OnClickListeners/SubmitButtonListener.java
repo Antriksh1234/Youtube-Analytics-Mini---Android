@@ -1,7 +1,5 @@
 package com.example.youtubeananlyticsmini.OnClickListeners;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 import com.example.youtubeananlyticsmini.AnalyticActivity;
 import com.example.youtubeananlyticsmini.Constants;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +20,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.example.youtubeananlyticsmini.VideoFeedback;
 
 public class SubmitButtonListener implements View.OnClickListener {
 
@@ -127,6 +123,7 @@ class BackgroundTask extends Thread {
                     Intent intent = new Intent(context, AnalyticActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constants.INTENT_KEY, response.toString());
+                    intent.putExtra(Constants.VIDEO_LINK, videoURL);
                     context.startActivity(intent);
                 });
             } else {

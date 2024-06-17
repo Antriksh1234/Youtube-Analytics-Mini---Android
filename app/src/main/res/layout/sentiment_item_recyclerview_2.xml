@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/sentiment_text_bar_chart"
+        android:text="Positive"
+        android:textColor="@color/white" />
+
+    <View
+        android:id="@+id/sentiment_bar"
+        android:layout_below="@id/sentiment_text_bar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/sentiment_bar"/>
+
+
+</RelativeLayout>

@@ -1,11 +1,11 @@
 package com.example.youtubeananlyticsmini;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ProgressBar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.youtubeananlyticsmini.OnClickListeners.SubmitButtonListener;
 import com.google.android.material.textfield.TextInputEditText;

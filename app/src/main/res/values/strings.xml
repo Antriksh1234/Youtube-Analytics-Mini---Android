@@ -4,4 +4,6 @@
     <string name="example_channel_name">Tech With Lucy</string>
     <string name="example_video_title">How much do AWS Solutions Architects get paid? | Salaries Revealed</string>
     <string name="explain_feature">Paste your Video link here\n</string>
+    <string name="lorem_ipsum">lorem ipsum</string>
+    <string name="lorem_ipsum_para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
 </resources>

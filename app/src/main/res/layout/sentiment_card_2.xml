@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     android:layout_width="match_parent"
@@ -19,72 +19,13 @@
         android:layout_marginBottom="20dp"
         android:textAlignment="center"/>
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:id="@+id/sentiment_1"
-        android:text="Positive"
-        android:textColor="@color/white"
-        android:layout_below="@id/sentiment_section_title_2"/>
-
-    <View
-        android:id="@+id/sentiment_bar_1"
-        android:layout_below="@id/sentiment_1"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/sentiment_bar"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:id="@+id/sentiment_2"
-        android:text="Positive"
-        android:textColor="@color/white"
-        android:layout_below="@id/sentiment_bar_1"/>
-
-    <View
-        android:id="@+id/sentiment_bar_2"
-        android:layout_below="@id/sentiment_2"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/sentiment_bar"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sentiment_3"
-        android:layout_marginBottom="4dp"
-        android:text="Positive"
-        android:textColor="@color/white"
-        android:layout_below="@id/sentiment_bar_2"/>
-
-    <View
-        android:id="@+id/sentiment_bar_3"
-        android:layout_below="@id/sentiment_3"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="10dp"
-        android:background="@drawable/sentiment_bar"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:id="@+id/sentiment_4"
-        android:text="Positive"
-        android:textColor="@color/white"
-        android:layout_below="@id/sentiment_bar_3"/>
-
-    <View
-        android:id="@+id/sentiment_bar_4"
-        android:layout_below="@id/sentiment_4"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/sentiment_bar"/>
+        android:layout_marginBottom="20dp"
+        tools:listitem="@layout/sentiment_item_recyclerview_2"
+        tools:itemCount="4"
+        android:layout_below="@id/sentiment_section_title_2"
+        android:id="@+id/sentiment_recyclerview_bar_chart" />
 
 </RelativeLayout>

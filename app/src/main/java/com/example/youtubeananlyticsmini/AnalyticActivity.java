@@ -1,16 +1,20 @@
 package com.example.youtubeananlyticsmini;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.example.youtubeananlyticsmini.OnClickListeners.PlayVideoButtonListener;
+import com.example.youtubeananlyticsmini.adapters.SentimentAdapter;
+import com.example.youtubeananlyticsmini.adapters.SentimentAdapter2;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -24,7 +28,9 @@ import java.util.Map;
 
 public class AnalyticActivity extends AppCompatActivity {
 
+    //Get these from intent
     private VideoFeedback videoFeedback;
+    private String videoURL;
 
 
     //This is the video info card
@@ -34,6 +40,7 @@ public class AnalyticActivity extends AppCompatActivity {
     //This is the video stats card
     private TextView likesCountTextView, viewsCountTextView, commentsCountTextView;
 
+    private Button playVideoButton;
 
     //This is the channel info card
     private ImageView channelThumbnail;
@@ -43,10 +50,10 @@ public class AnalyticActivity extends AppCompatActivity {
     //This is the video sentiment card
     private PieChart pieChart;
     private TextView semtimentTextView;
+    private RecyclerView semtimentRecyclerView;
 
     //This is new sentiment card
-    private TextView sentiment1, sentiment2, sentiment3, sentiment4;
-    private View sentimentBar1, sentimentBar2, sentimentBar3, sentimentBar4;
+    private RecyclerView sentimentRecyclerView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,8 @@ public class AnalyticActivity extends AppCompatActivity {
         videoTitleTextView = findViewById(R.id.video_title);
         videoThumbnail = findViewById(R.id.video_thumbnail);
 
+        playVideoButton= findViewById(R.id.watch_button);
+
         //Channel Info
         channelThumbnail = findViewById(R.id.channel_icon);
         channelNameTextView = findViewById(R.id.channel_name);
@@ -65,24 +74,21 @@ public class AnalyticActivity extends AppCompatActivity {
         //Video Sentiment
         semtimentTextView = findViewById(R.id.video_sentiment_text);
         pieChart = findViewById(R.id.sentiment_chart);
+        semtimentRecyclerView = findViewById(R.id.sentiment_recycleview);
 
         //Video Stats
         likesCountTextView = findViewById(R.id.likes_count);
         viewsCountTextView = findViewById(R.id.views_count);
         commentsCountTextView = findViewById(R.id.comments_count);
 
-        sentiment1 = findViewById(R.id.sentiment_1);
-        sentiment2 = findViewById(R.id.sentiment_2);
-        sentiment3 = findViewById(R.id.sentiment_3);
-        sentiment4 = findViewById(R.id.sentiment_4);
-
-        sentimentBar1 = findViewById(R.id.sentiment_bar_1);
-        sentimentBar2 = findViewById(R.id.sentiment_bar_2);
-        sentimentBar3 = findViewById(R.id.sentiment_bar_3);
-        sentimentBar4 = findViewById(R.id.sentiment_bar_4);
+        //Video Sentiment card 2
+        sentimentRecyclerView2 = findViewById(R.id.sentiment_recyclerview_bar_chart);
 
         String feedbackJson = getIntent().getStringExtra(Constants.INTENT_KEY);
         videoFeedback = new Gson().fromJson(feedbackJson, VideoFeedback.class);
+        videoURL = getIntent().getStringExtra(Constants.VIDEO_LINK);
+
+        playVideoButton.setOnClickListener(new PlayVideoButtonListener(getApplicationContext(), videoURL));
 
         fillUIWithStats();
     }
@@ -91,7 +97,7 @@ public class AnalyticActivity extends AppCompatActivity {
         fillVideoInfoCard();
         fillChannelInfoCard();
         fillSentimentCard();
-
+        fillSentimentCardTwo();
     }
 
     private void fillVideoInfoCard() {
@@ -115,18 +121,29 @@ public class AnalyticActivity extends AppCompatActivity {
     private void fillSentimentCard() {
         //Fil sentiments
         semtimentTextView.setText(videoFeedback.getSentiment());
-        Map<String, Integer> sentimentStats = videoFeedback.getSentimentStats();
+
+        Map<String, Integer> sentimentMap =  videoFeedback.getSentimentStats();
+        if (sentimentMap == null) {
+            return;
+        }
+
+        Sentiment []sentiments = new Sentiment[4];
+        sentiments[0] = new Sentiment("Positive: " + sentimentMap.getOrDefault("POSITIVE", 0), sentimentMap.getOrDefault("POSITIVE", 0), "#15bd15", R.drawable.positive_circle);
+        sentiments[1] = new Sentiment("Negative: " + sentimentMap.getOrDefault("NEGATIVE", 0), sentimentMap.getOrDefault("NEGATIVE", 0), "#ed3e4f", R.drawable.negative_circle);
+        sentiments[2] = new Sentiment("Mixed: " + sentimentMap.getOrDefault("MIXED", 0), sentimentMap.getOrDefault("MIXED", 0), "#ebb513", R.drawable.mixed_circle);
+        sentiments[3] = new Sentiment("Neutral: " + sentimentMap.getOrDefault("NEUTRAL", 0), sentimentMap.getOrDefault("NEUTRAL", 0), "#148f70", R.drawable.neutral_circle);
+
+        Arrays.sort(sentiments);
         List<PieEntry> entries = new ArrayList<>();
 
-        for (Map.Entry<String, Integer> entry : sentimentStats.entrySet()) {
-            String sentiment = entry.getKey();
-            int count = entry.getValue();
-            entries.add(new PieEntry(count, sentiment));
+        for (Sentiment sentiment : sentiments) {
+            int count = sentiment.getScore();
+            entries.add(new PieEntry(count, ""));
             System.out.println(sentiment + " " + count);
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setColors(Color.parseColor("#15bd15"), Color.parseColor("#ed3e4f"), Color.parseColor("#148f70"), Color.parseColor("#ebb513"));
+        dataSet.setColors(Color.parseColor(sentiments[0].getColor()), Color.parseColor(sentiments[1].getColor()), Color.parseColor(sentiments[2].getColor()), Color.parseColor(sentiments[3].getColor()));
         dataSet.setXValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
         dataSet.setValueFormatter(new ValueFormatter() {
@@ -142,29 +159,35 @@ public class AnalyticActivity extends AppCompatActivity {
         data.setValueTextColor(Color.WHITE);
 
         pieChart.setData(data);
+        pieChart.setHoleRadius(60);
         pieChart.getDescription().setEnabled(false);
         pieChart.getLegend().setEnabled(false);
         pieChart.setEntryLabelColor(Color.WHITE);
         pieChart.setHoleColor(Color.parseColor("#272323"));
         pieChart.invalidate(); // Refresh the chart
+
+        SentimentAdapter adapter = new SentimentAdapter(getApplicationContext(), sentiments);
+        semtimentRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        semtimentRecyclerView.setAdapter(adapter);
     }
 
     void fillSentimentCardTwo() {
-        Map<String, Integer> sentiment =  videoFeedback.getSentimentStats();
-        if (sentiment == null) {
+        Map<String, Integer> sentimentMap =  videoFeedback.getSentimentStats();
+        if (sentimentMap == null) {
             return;
         }
 
         Sentiment []sentiments = new Sentiment[4];
-        sentiments[0] = new Sentiment("Positive", sentiment.getOrDefault("POSITIVE", 0));
-        sentiments[1] = new Sentiment("Negative", sentiment.getOrDefault("NEGATIVE", 0));
-        sentiments[2] = new Sentiment("Mixed", sentiment.getOrDefault("MIXED", 0));
-        sentiments[3] = new Sentiment("Neutral", sentiment.getOrDefault("NEUTRAL", 0));
+        sentiments[0] = new Sentiment("Positive", sentimentMap.getOrDefault("POSITIVE", 0), "#15bd15", R.drawable.positive_circle);
+        sentiments[1] = new Sentiment("Negative", sentimentMap.getOrDefault("NEGATIVE", 0), "#ed3e4f", R.drawable.negative_circle);
+        sentiments[2] = new Sentiment("Mixed", sentimentMap.getOrDefault("MIXED", 0), "#ebb513", R.drawable.mixed_circle);
+        sentiments[3] = new Sentiment("Neutral", sentimentMap.getOrDefault("NEUTRAL", 0), "#148f70", R.drawable.neutral_circle);
 
         Arrays.sort(sentiments);
 
-        float maxWidth = sentimentBar1.getWidth();
-
+        SentimentAdapter2 adapter = new SentimentAdapter2(getApplicationContext(), sentiments);
+        sentimentRecyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        sentimentRecyclerView2.setAdapter(adapter);
     }
 
     int getMax(int a, int b, int c, int d) {
