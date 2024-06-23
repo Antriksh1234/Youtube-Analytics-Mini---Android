@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -17,7 +17,8 @@
         <TextView
             android:id="@+id/comment_first_letter"
             android:text="A"
-            android:textSize="20sp"
+            android:layout_marginTop="2dp"
+            android:textSize="18sp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:layout_width="match_parent"
@@ -35,12 +36,34 @@
 
     <TextView
         android:layout_marginStart="20dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:layout_below="@id/comment_name"
         android:id="@+id/comment_text"
         android:text="@string/lorem_ipsum_para"
         android:layout_toEndOf="@id/user_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:src="@drawable/baseline_thumb_up_24"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/user_card"
+        android:layout_below="@id/comment_text"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/like_icon"
+        />
+
+    <TextView
+        android:id="@+id/likes_of_comment"
+        android:text="0"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/like_icon"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/comment_text"/>
 
 </RelativeLayout>

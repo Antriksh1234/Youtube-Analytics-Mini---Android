@@ -6,6 +6,8 @@
     tools:context=".CommentActivity">
 
     <TextView
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
         android:id="@+id/comment_activity_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +18,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comment_recyclerview"
+        android:layout_marginEnd="20dp"
         android:layout_below="@id/comment_activity_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

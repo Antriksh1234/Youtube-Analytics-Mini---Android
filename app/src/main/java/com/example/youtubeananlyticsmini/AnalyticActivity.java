@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.youtubeananlyticsmini.OnClickListeners.PlayVideoButtonListener;
+import com.example.youtubeananlyticsmini.OnClickListeners.ViewCommentButtonListener;
 import com.example.youtubeananlyticsmini.adapters.SentimentAdapter;
 import com.example.youtubeananlyticsmini.adapters.SentimentAdapter2;
 import com.github.mikephil.charting.charts.PieChart;
@@ -40,7 +41,7 @@ public class AnalyticActivity extends AppCompatActivity {
     //This is the video stats card
     private TextView likesCountTextView, viewsCountTextView, commentsCountTextView;
 
-    private Button playVideoButton;
+    private Button playVideoButton, viewComments;
 
     //This is the channel info card
     private ImageView channelThumbnail;
@@ -64,7 +65,8 @@ public class AnalyticActivity extends AppCompatActivity {
         videoTitleTextView = findViewById(R.id.video_title);
         videoThumbnail = findViewById(R.id.video_thumbnail);
 
-        playVideoButton= findViewById(R.id.watch_button);
+        playVideoButton = findViewById(R.id.watch_button);
+        viewComments = findViewById(R.id.view_comments);
 
         //Channel Info
         channelThumbnail = findViewById(R.id.channel_icon);
@@ -89,6 +91,7 @@ public class AnalyticActivity extends AppCompatActivity {
         videoURL = getIntent().getStringExtra(Constants.VIDEO_LINK);
 
         playVideoButton.setOnClickListener(new PlayVideoButtonListener(getApplicationContext(), videoURL));
+        viewComments.setOnClickListener(new ViewCommentButtonListener(getApplicationContext(), feedbackJson));
 
         fillUIWithStats();
     }

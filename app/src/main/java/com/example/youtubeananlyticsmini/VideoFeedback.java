@@ -1,5 +1,6 @@
 package com.example.youtubeananlyticsmini;
 
+import java.util.List;
 import java.util.Map;
 
 public class VideoFeedback {
@@ -17,6 +18,8 @@ public class VideoFeedback {
     //This is video info
     private String title, thumbnailURL;
     private int channelSubs;
+
+    private List<Comment> comments;
 
     public String getChannelThumbnail() {
         return channelThumbnail;
@@ -106,7 +109,7 @@ public class VideoFeedback {
         this.channelSubs = channelSubs;
     }
 
-    public VideoFeedback(String sentiment, String summary, String channel, String title, String thumbnailURL, int views, int likes, int numberOfComments, Map<String, Integer> sentimentStats, String channelThumbnail, int channelSubs) {
+    public VideoFeedback(String sentiment, String summary, String channel, String title, String thumbnailURL, int views, int likes, int numberOfComments, Map<String, Integer> sentimentStats, String channelThumbnail, int channelSubs, List<Comment> comments) {
         this.sentiment = sentiment;
         this.summary = summary;
         this.channel = channel;
@@ -118,5 +121,14 @@ public class VideoFeedback {
         this.sentimentStats = sentimentStats;
         this.channelThumbnail = channelThumbnail;
         this.channelSubs = channelSubs;
+        this.comments = comments;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

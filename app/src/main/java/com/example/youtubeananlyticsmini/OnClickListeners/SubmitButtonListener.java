@@ -69,7 +69,7 @@ public class SubmitButtonListener implements View.OnClickListener {
     }
 
     private void fetchVideoFeedback(String videoURL) {
-        BackgroundTask task = new BackgroundTask(videoURL, handler, progressBar, context);
+        BackgroundTask task = new BackgroundTask(videoURL, handler, progressBar, context, videoURLEditText);
         task.start();
     }
 }
@@ -83,11 +83,14 @@ class BackgroundTask extends Thread {
 
     private final Context context;
 
-    BackgroundTask(String videoURL, Handler handler, ProgressBar progressBar, Context context) {
+    private TextInputEditText videoURLEditText;
+
+    BackgroundTask(String videoURL, Handler handler, ProgressBar progressBar, Context context, TextInputEditText videoURLEditText) {
         this.videoURL = videoURL;
         this.handler = handler;
         this.progressBar = progressBar;
         this.context = context;
+        this.videoURLEditText = videoURLEditText;
     }
 
     @Override
@@ -120,6 +123,7 @@ class BackgroundTask extends Thread {
                 //Update UI
                 handler.post(() -> {
                     progressBar.setVisibility(View.GONE);
+                    videoURLEditText.setText("");
                     Intent intent = new Intent(context, AnalyticActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constants.INTENT_KEY, response.toString());
