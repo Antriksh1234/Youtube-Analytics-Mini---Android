@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.example.youtubeananlyticsmini.OnClickListeners.PlayVideoButtonListener;
 import com.example.youtubeananlyticsmini.OnClickListeners.ViewCommentButtonListener;
 import com.example.youtubeananlyticsmini.adapters.SentimentAdapter;
-import com.example.youtubeananlyticsmini.adapters.SentimentAdapter2;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -31,7 +30,6 @@ public class AnalyticActivity extends AppCompatActivity {
 
     //Get these from intent
     private VideoFeedback videoFeedback;
-    private String videoURL;
 
 
     //This is the video info card
@@ -40,8 +38,6 @@ public class AnalyticActivity extends AppCompatActivity {
 
     //This is the video stats card
     private TextView likesCountTextView, viewsCountTextView, commentsCountTextView;
-
-    private Button playVideoButton, viewComments;
 
     //This is the channel info card
     private ImageView channelThumbnail;
@@ -53,9 +49,6 @@ public class AnalyticActivity extends AppCompatActivity {
     private TextView semtimentTextView;
     private RecyclerView semtimentRecyclerView;
 
-    //This is new sentiment card
-    private RecyclerView sentimentRecyclerView2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +58,8 @@ public class AnalyticActivity extends AppCompatActivity {
         videoTitleTextView = findViewById(R.id.video_title);
         videoThumbnail = findViewById(R.id.video_thumbnail);
 
-        playVideoButton = findViewById(R.id.watch_button);
-        viewComments = findViewById(R.id.view_comments);
+        Button playVideoButton = findViewById(R.id.watch_button);
+        Button viewComments = findViewById(R.id.view_comments);
 
         //Channel Info
         channelThumbnail = findViewById(R.id.channel_icon);
@@ -83,12 +76,10 @@ public class AnalyticActivity extends AppCompatActivity {
         viewsCountTextView = findViewById(R.id.views_count);
         commentsCountTextView = findViewById(R.id.comments_count);
 
-        //Video Sentiment card 2
-        sentimentRecyclerView2 = findViewById(R.id.sentiment_recyclerview_bar_chart);
 
         String feedbackJson = getIntent().getStringExtra(Constants.INTENT_KEY);
         videoFeedback = new Gson().fromJson(feedbackJson, VideoFeedback.class);
-        videoURL = getIntent().getStringExtra(Constants.VIDEO_LINK);
+        String videoURL = getIntent().getStringExtra(Constants.VIDEO_LINK);
 
         playVideoButton.setOnClickListener(new PlayVideoButtonListener(getApplicationContext(), videoURL));
         viewComments.setOnClickListener(new ViewCommentButtonListener(getApplicationContext(), feedbackJson));
@@ -100,7 +91,6 @@ public class AnalyticActivity extends AppCompatActivity {
         fillVideoInfoCard();
         fillChannelInfoCard();
         fillSentimentCard();
-        fillSentimentCardTwo();
     }
 
     private void fillVideoInfoCard() {
@@ -172,29 +162,6 @@ public class AnalyticActivity extends AppCompatActivity {
         SentimentAdapter adapter = new SentimentAdapter(getApplicationContext(), sentiments);
         semtimentRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         semtimentRecyclerView.setAdapter(adapter);
-    }
-
-    void fillSentimentCardTwo() {
-        Map<String, Integer> sentimentMap =  videoFeedback.getSentimentStats();
-        if (sentimentMap == null) {
-            return;
-        }
-
-        Sentiment []sentiments = new Sentiment[4];
-        sentiments[0] = new Sentiment("Positive", sentimentMap.getOrDefault("POSITIVE", 0), "#15bd15", R.drawable.positive_circle);
-        sentiments[1] = new Sentiment("Negative", sentimentMap.getOrDefault("NEGATIVE", 0), "#ed3e4f", R.drawable.negative_circle);
-        sentiments[2] = new Sentiment("Mixed", sentimentMap.getOrDefault("MIXED", 0), "#ebb513", R.drawable.mixed_circle);
-        sentiments[3] = new Sentiment("Neutral", sentimentMap.getOrDefault("NEUTRAL", 0), "#148f70", R.drawable.neutral_circle);
-
-        Arrays.sort(sentiments);
-
-        SentimentAdapter2 adapter = new SentimentAdapter2(getApplicationContext(), sentiments);
-        sentimentRecyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        sentimentRecyclerView2.setAdapter(adapter);
-    }
-
-    int getMax(int a, int b, int c, int d) {
-        return Math.max(Math.max(a, b), Math.max(c, d));
     }
 
     private String formatNumbers(int subscriberCount) {
