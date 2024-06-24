@@ -1,7 +1,11 @@
 package com.example.youtubeananlyticsmini.OnClickListeners;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +39,13 @@ public class SubmitButtonListener implements View.OnClickListener {
         this.progressBar = progressBar;
         this.context = context;
     }
+    private Boolean isNetworkAvailable(Application application) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network nw = connectivityManager.getActiveNetwork();
+        if (nw == null) return false;
+        NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
+        return actNw != null && (actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH));
+    }
 
     private boolean isValidURL(String url) {
         String videoId = null;
@@ -59,6 +70,11 @@ public class SubmitButtonListener implements View.OnClickListener {
         String url = videoURLEditText.getText().toString();
         if (!isValidURL(url)) {
             Toast.makeText(view.getContext(), "Please Provide a correct URL!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isNetworkAvailable((Application) context)) {
+            Toast.makeText(view.getContext(), "Please Check your internet connection and try again!!", Toast.LENGTH_SHORT).show();
             return;
         }
 

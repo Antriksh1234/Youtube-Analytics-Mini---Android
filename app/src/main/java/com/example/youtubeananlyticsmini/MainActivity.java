@@ -7,27 +7,25 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.youtubeananlyticsmini.OnClickListeners.ClearButtonListener;
 import com.example.youtubeananlyticsmini.OnClickListeners.SubmitButtonListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextInputEditText videoURLEditText;
-    private Button submitButton;
-    private Handler handler;
-    private ProgressBar progressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        videoURLEditText = findViewById(R.id.video_url_edit_text);
-        submitButton = findViewById(R.id.submitButton);
-        handler = new Handler();
-        progressBar = findViewById(R.id.stats_fetch_progressbar);
+        TextInputEditText videoURLEditText = findViewById(R.id.video_url_edit_text);
+        Button submitButton = findViewById(R.id.submitButton);
+        Handler handler = new Handler();
+        ProgressBar progressBar = findViewById(R.id.stats_fetch_progressbar);
+        Button clearButton = findViewById(R.id.clear_button);
 
         submitButton.setOnClickListener(new SubmitButtonListener(videoURLEditText, handler, progressBar, getApplicationContext()));
+        clearButton.setOnClickListener(new ClearButtonListener(videoURLEditText));
     }
 }

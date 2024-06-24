@@ -37,15 +37,30 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:layout_below="@+id/outlinedTextField"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/submitButton"
+        <RelativeLayout
             android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Get Feedback"
-            />
+            android:layout_below="@id/outlinedTextField">
+
+            <Button
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/submitButton"
+                android:id="@+id/clear_button"
+                android:text="Clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_marginEnd="10dp"
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Feedback"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
