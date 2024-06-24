@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.youtubeananlyticsmini.Comment;
+import com.example.youtubeananlyticsmini.models.Comment;
 import com.example.youtubeananlyticsmini.R;
 
 import java.util.List;

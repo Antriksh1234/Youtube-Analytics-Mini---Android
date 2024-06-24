@@ -1,4 +1,4 @@
-package com.example.youtubeananlyticsmini;
+package com.example.youtubeananlyticsmini.models;
 
 public class Sentiment implements Comparable<Sentiment> {
     private String name;

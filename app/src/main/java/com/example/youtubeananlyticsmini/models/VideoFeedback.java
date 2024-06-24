@@ -1,4 +1,6 @@
-package com.example.youtubeananlyticsmini;
+package com.example.youtubeananlyticsmini.models;
+
+import com.example.youtubeananlyticsmini.models.Comment;
 
 import java.util.List;
 import java.util.Map;

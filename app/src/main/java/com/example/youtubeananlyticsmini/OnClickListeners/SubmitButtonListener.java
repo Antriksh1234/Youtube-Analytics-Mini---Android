@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.youtubeananlyticsmini.AnalyticActivity;
 import com.example.youtubeananlyticsmini.Constants;
+import com.example.youtubeananlyticsmini.api.NetworkChecker;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.BufferedReader;
@@ -38,13 +39,6 @@ public class SubmitButtonListener implements View.OnClickListener {
         this.handler = handler;
         this.progressBar = progressBar;
         this.context = context;
-    }
-    private Boolean isNetworkAvailable(Application application) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
-        Network nw = connectivityManager.getActiveNetwork();
-        if (nw == null) return false;
-        NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
-        return actNw != null && (actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH));
     }
 
     private boolean isValidURL(String url) {
@@ -73,7 +67,7 @@ public class SubmitButtonListener implements View.OnClickListener {
             return;
         }
 
-        if (!isNetworkAvailable((Application) context)) {
+        if (!NetworkChecker.isNetworkAvailable((Application) context)) {
             Toast.makeText(view.getContext(), "Please Check your internet connection and try again!!", Toast.LENGTH_SHORT).show();
             return;
         }

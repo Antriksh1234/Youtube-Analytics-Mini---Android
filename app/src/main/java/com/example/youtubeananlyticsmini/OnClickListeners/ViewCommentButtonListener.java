@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.example.youtubeananlyticsmini.CommentActivity;
 import com.example.youtubeananlyticsmini.Constants;
-import com.example.youtubeananlyticsmini.VideoFeedback;
 
 public class ViewCommentButtonListener implements View.OnClickListener {
 

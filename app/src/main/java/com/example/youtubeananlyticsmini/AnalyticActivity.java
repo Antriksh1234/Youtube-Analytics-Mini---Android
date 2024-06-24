@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.example.youtubeananlyticsmini.OnClickListeners.PlayVideoButtonListener;
 import com.example.youtubeananlyticsmini.OnClickListeners.ViewCommentButtonListener;
 import com.example.youtubeananlyticsmini.adapters.SentimentAdapter;
+import com.example.youtubeananlyticsmini.models.Sentiment;
+import com.example.youtubeananlyticsmini.models.VideoFeedback;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -120,7 +122,7 @@ public class AnalyticActivity extends AppCompatActivity {
             return;
         }
 
-        Sentiment []sentiments = new Sentiment[4];
+        Sentiment[]sentiments = new Sentiment[4];
         sentiments[0] = new Sentiment("Positive: " + sentimentMap.getOrDefault("POSITIVE", 0), sentimentMap.getOrDefault("POSITIVE", 0), "#15bd15", R.drawable.positive_circle);
         sentiments[1] = new Sentiment("Negative: " + sentimentMap.getOrDefault("NEGATIVE", 0), sentimentMap.getOrDefault("NEGATIVE", 0), "#ed3e4f", R.drawable.negative_circle);
         sentiments[2] = new Sentiment("Mixed: " + sentimentMap.getOrDefault("MIXED", 0), sentimentMap.getOrDefault("MIXED", 0), "#ebb513", R.drawable.mixed_circle);

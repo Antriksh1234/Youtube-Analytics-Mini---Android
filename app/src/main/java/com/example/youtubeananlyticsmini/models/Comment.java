@@ -1,4 +1,4 @@
-package com.example.youtubeananlyticsmini;
+package com.example.youtubeananlyticsmini.models;
 public class Comment {
     private int likes;
     private String commenter;

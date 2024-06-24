@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeananlyticsmini.R;
-import com.example.youtubeananlyticsmini.Sentiment;
+import com.example.youtubeananlyticsmini.models.Sentiment;
 
 public class SentimentAdapter extends RecyclerView.Adapter<SentimentHolder>{
 
