@@ -3,9 +3,6 @@ package com.example.youtubeananlyticsmini.OnClickListeners;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.youtubeananlyticsmini.AnalyticActivity;
-import com.example.youtubeananlyticsmini.Constants;
+import com.example.youtubeananlyticsmini.utils.Constants;
 import com.example.youtubeananlyticsmini.api.NetworkChecker;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -137,7 +134,7 @@ class BackgroundTask extends Thread {
                     Intent intent = new Intent(context, AnalyticActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constants.INTENT_KEY, response.toString());
-                    intent.putExtra(Constants.VIDEO_LINK, videoURL);
+                    intent.putExtra(Constants.VIDEO_LINK_INTENT_KEY, videoURL);
                     context.startActivity(intent);
                 });
             } else {

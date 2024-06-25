@@ -16,6 +16,7 @@ import com.example.youtubeananlyticsmini.OnClickListeners.ViewCommentButtonListe
 import com.example.youtubeananlyticsmini.adapters.SentimentAdapter;
 import com.example.youtubeananlyticsmini.models.Sentiment;
 import com.example.youtubeananlyticsmini.models.VideoFeedback;
+import com.example.youtubeananlyticsmini.utils.Constants;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -81,7 +82,7 @@ public class AnalyticActivity extends AppCompatActivity {
 
         String feedbackJson = getIntent().getStringExtra(Constants.INTENT_KEY);
         videoFeedback = new Gson().fromJson(feedbackJson, VideoFeedback.class);
-        String videoURL = getIntent().getStringExtra(Constants.VIDEO_LINK);
+        String videoURL = getIntent().getStringExtra(Constants.VIDEO_LINK_INTENT_KEY);
 
         playVideoButton.setOnClickListener(new PlayVideoButtonListener(getApplicationContext(), videoURL));
         viewComments.setOnClickListener(new ViewCommentButtonListener(getApplicationContext(), feedbackJson));
