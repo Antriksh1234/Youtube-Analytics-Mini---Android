@@ -15,7 +15,7 @@ import com.example.youtubeananlyticsmini.models.Sentiment;
 public class SentimentAdapter extends RecyclerView.Adapter<SentimentHolder>{
 
     Context context;
-   Sentiment [] sentimentList;
+    Sentiment [] sentimentList;
 
     public SentimentAdapter(Context context, Sentiment [] sentimentList) {
         this.context = context;
@@ -42,11 +42,11 @@ public class SentimentAdapter extends RecyclerView.Adapter<SentimentHolder>{
 }
 
 class SentimentHolder extends RecyclerView.ViewHolder {
-
-    TextView textView = itemView.findViewById(R.id.sentiment_text);
-    View view = itemView.findViewById(R.id.sentiment_color);
-
+    TextView textView;
+    View view;
     public SentimentHolder(@NonNull View itemView) {
         super(itemView);
+        textView = itemView.findViewById(R.id.sentiment_text);
+        view = itemView.findViewById(R.id.sentiment_color);
     }
 }
