@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeananlyticsmini.models.Comment;
 import com.example.youtubeananlyticsmini.R;
+import com.example.youtubeananlyticsmini.utils.HtmlUtils;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
         char firstLetter = Character.toUpperCase(commentList.get(position).getCommenter().charAt(1));
         holder.commenterFirstLetterTextView.setText("" + firstLetter);
         holder.nameTextView.setText(commentList.get(position).getCommenter());
-        holder.commentTextView.setText(commentList.get(position).getCommentText());
+        holder.commentTextView.setText(HtmlUtils.decodeHtml(commentList.get(position).getCommentText()));   //Do HTML Decoding
         holder.likesTextView.setText("" + commentList.get(position).getLikes());
     }
 
