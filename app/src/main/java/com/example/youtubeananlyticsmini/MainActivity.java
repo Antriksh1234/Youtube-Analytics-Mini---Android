@@ -1,9 +1,11 @@
 package com.example.youtubeananlyticsmini;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,8 +29,22 @@ public class MainActivity extends AppCompatActivity {
         Button clearButton = findViewById(R.id.clear_button);
         Button openYoutubeButton = findViewById(R.id.open_youtube_button);
 
+        setEditTextValue(videoURLEditText);
+
         submitButton.setOnClickListener(new SubmitButtonListener(videoURLEditText, handler, progressBar, getApplicationContext()));
         clearButton.setOnClickListener(new ClearButtonListener(videoURLEditText));
         openYoutubeButton.setOnClickListener(new OpenYoutubeButtonListener(getApplicationContext()));
+    }
+
+    private void setEditTextValue(TextInputEditText videoURLEditText) {
+        Intent intent = getIntent();
+        if (intent == null) {
+            return;
+        }
+
+        String value = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (value != null) {
+            videoURLEditText.setText(value);
+        }
     }
 }
