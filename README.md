@@ -5,5 +5,5 @@ The YouTube Analytics Mini is an Android application that provides users with th
 
 This android application acts as an user interface for the end user.
 
-# Lambda Code-
+## Lambda Code-
 The code of the Lambda can be viewed here- https://github.com/Antriksh1234/Youtube-Analytics-Mini---Lambda
