@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,13 +24,12 @@ public class MainActivity extends AppCompatActivity {
         TextInputEditText videoURLEditText = findViewById(R.id.video_url_edit_text);
         Button submitButton = findViewById(R.id.submitButton);
         Handler handler = new Handler();
-        ProgressBar progressBar = findViewById(R.id.stats_fetch_progressbar);
         Button clearButton = findViewById(R.id.clear_button);
         Button openYoutubeButton = findViewById(R.id.open_youtube_button);
 
         setEditTextValue(videoURLEditText);
 
-        submitButton.setOnClickListener(new SubmitButtonListener(videoURLEditText, handler, progressBar, getApplicationContext()));
+        submitButton.setOnClickListener(new SubmitButtonListener(videoURLEditText, handler, getApplicationContext(), MainActivity.this));
         clearButton.setOnClickListener(new ClearButtonListener(videoURLEditText));
         openYoutubeButton.setOnClickListener(new OpenYoutubeButtonListener(getApplicationContext()));
     }

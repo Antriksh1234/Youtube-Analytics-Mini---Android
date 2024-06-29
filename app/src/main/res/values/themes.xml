@@ -5,5 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="AlertDialog_Custom_Background" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <!-- dialog_background is drawable shape with corner radius -->
+        <item name="android:background">@drawable/round_shape_card</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="Theme.YoutubeAnanlyticsMini" parent="Base.Theme.YoutubeAnanlyticsMini" />
 </resources>
