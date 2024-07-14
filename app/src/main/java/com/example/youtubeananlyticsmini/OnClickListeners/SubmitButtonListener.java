@@ -93,7 +93,7 @@ public class SubmitButtonListener implements View.OnClickListener {
 
 class BackgroundTask extends Thread {
     private String videoURL = "";
-    private final String APIEndpoint = "https://ymmhrwoyoj.execute-api.ap-south-1.amazonaws.com/getVideoFeedback";
+    private final String APIEndpoint = "API-Gateway-Endpoint";
     private final String TAG = "MainActivity:SubmitButtonListener";
     private final Handler handler;
 
